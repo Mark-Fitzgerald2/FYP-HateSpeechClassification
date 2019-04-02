@@ -19,10 +19,10 @@ class streamer(object):
 		self.api = self.getTweepyApi()
 
 	def getTweepyApi(self):
-		CONSUMER_KEY = 'uYZhhT1aOUNXZyvxz0rmI7ItX'
-		CONSUMER_SECRET = 'oBQsObyE1E2ohNOIa8rvSfvNWnbZ8x5RDTOEGSUWCmYg7b9nBC'
-		ACCESS_TOKEN = '1053207253547925505-GCOsjUa2zuhcId71qpsnV2UPxtjz9k'
-		ACCESS_TOKEN_SECRET = 'hp7c8Vl1Ri1USxR89dPJZlBPPUHKyhfYKervnXkezUw55'
+		CONSUMER_KEY = ''
+		CONSUMER_SECRET = ''
+		ACCESS_TOKEN = ''
+		ACCESS_TOKEN_SECRET = ''
 
 		auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
 		auth.set_access_token(ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
