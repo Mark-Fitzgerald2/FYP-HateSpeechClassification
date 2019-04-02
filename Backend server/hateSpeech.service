@@ -1,0 +1,12 @@
+[Unit]  
+Description=Gunicorn instance to serve hateSpeech  
+  
+[Service]  
+Type=simple  
+User=user  
+WorkingDirectory=/user/hateSpeech  
+ExecStart=/user/hateSpeech/hatespeechenv/bin/gunicorn --workers 4 --bind unix:hateSpeech.sock -m 007 wsgi:app  
+Restart=always  
+  
+[Install]  
+WantedBy=multi-user.target  

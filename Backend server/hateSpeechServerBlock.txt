@@ -1,0 +1,9 @@
+server {  
+        listen 80;  
+        server_name 134.209.27.230;  
+  
+        location / {  
+                include proxy_params;  
+                proxy_pass http://unix:/user/hateSpeech/hateSpeech.sock;  
+        }  
+} 
