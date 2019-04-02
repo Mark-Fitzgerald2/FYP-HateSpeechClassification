@@ -1,0 +1,1 @@
+print(list(map(str.lower, ["A","B","C"])))
