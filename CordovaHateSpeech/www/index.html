@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel='icon' href='images/Logo4.png' type='image/png' sizes="16x16" />
+  <title>Hate Speech</title>
+</head>
+<body>
+
+  <style>
+    container {
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+  <nav class="navbar navbar-dark bg-dark navbar-expand-sm fixed-top ">
+      <div class="container">
+
+          <span class="navbar-brand">Hate Speech</span>
+
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#myTogglerNav" aria-controls="myTogglerNav" aria-expanded="false" aria-label="Toggle Navigation">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="myTogglerNav">
+              <div class="navbar-nav ml-auto">
+                  <a class="nav-item nav-link" href="#twitterid">Twitter Id</a>
+                  <a class="nav-item nav-link" href="#text">Text</a>
+                  <a class="nav-item nav-link" href="#about">About</a>
+                  <a class="nav-item nav-link" href="#contact">Contact</a>
+              </div><!-- navbar -->
+          </div><!-- collapse -->
+
+      </div><!-- container -->
+  </nav><!-- nav -->
+  <div class="container" >
+      <div class="row bg-danger pb-3" id="twitterid" style="padding-top: 73px;">
+          <section class="col-sm-6 py-1">
+              <h1 class="text-center">Classify Users Twitter Account</h1>
+              <div class="form-group">
+                  <label class="form-control-label" for="userId">Twitter User Id</label>
+                  <input class="form-control" type="text" id="userId" placeholder="@NUIGalway">
+              </div>
+              <div class="form-group">
+                  <label class="form-control-label" for="numTweets">Number of tweets to search</label>
+                  <select class="form-control" id="numTweets">
+                      <option>Choose</option>
+                      <option value="10">10</option>
+                      <option value="25">25</option>
+                      <option value="50">50</option>
+                      <option value="75">75</option>
+                      <option value="100">100</option>
+                  </select>
+              </div>
+              <button class="btn btn-primary btn-block" onclick="classifyTwitterHandle()">Submit</button>
+          </section>
+          <section class="col-sm-6 py-1" id="twitterHandleResults">
+              <section class="text-center">
+                  <h1>Results</h1>
+              </section >
+              <section class="text-center">
+                  <span class="font-weight-bold">Does this user use hate speech?</span>
+                  <br>
+                  <span>Answer: </span>
+                  <span id="twitterIdOutput"></span>
+              </section>
+              <section class="text-center">
+                  <span class="font-weight-bold">What percentage of tweets used hate speech?</span>
+                  <br>
+                  <span>Answer: </span>
+                  <span id="IDProb"></span>
+              </section>
+              <section class="text-center">
+                  <span class="font-weight-bold">How each tweet was classified: </span>
+                  <canvas id="pieChartTwitterAcc"></canvas>
+              </section>
+          </section>
+      </div><!-- row -->
+      <div class="row bg-success py-3" id="text">
+          <section class="col-sm-6 py-1">
+              <!--<form class="form-group">
+                  <label class="form-control-label" for="textToClassify">Enter text to be classified</label>
+                  <textarea class="form-control" id="textToClassify" maxlength="280" rows="3" style="resize: none; height: 45vh;" required></textarea>
+                  <input class="btn btn-primary btn-block mt-2" type="submit" name="submit" value="Submit" id="submitText" onclick="classifyText()"/>
+              </form>-->
+              <h1 class="text-center">Classify Text</h1>
+              <div class="form-group">
+                  <label class="form-control-label" for="textToClassify">Enter text to be classified</label>
+                  <textarea class="form-control" id="textToClassify" maxlength="280" rows="3" style="resize: none; height: 45vh;"></textarea>
+              </div>
+              <button class="btn btn-primary btn-block" onclick="classifyText()">Submit</button>
+          </section>
+
+          <section class="col-sm-6 py-1" id="textResults">
+              <section class="text-center">
+                  <h1>Results</h1>
+                  <span class="font-weight-bold">Is this text Hate Speech?</span>
+                  <br>
+                  <span>Answer: </span>
+                  <span id="textOutput"></span>
+                  <br>
+                  <span class="font-weight-bold">What is the chance of a correct classification?</span>
+                  <br>
+                  <span>Answer: </span>
+                  <span id="textProb"></span>
+                  <br>
+                  <span class="font-weight-bold">Words most common in hate speech: </span>
+              </section>
+              <section>
+                  <canvas id="pieChart"></canvas>
+              </section>
+          </section>
+
+      </div><!-- row -->
+      <div class="row bg-warning py-3" id="about" >
+          <section class="col-sm-6">
+              <h3 class="text-center">Hate Speech Is defined as..</h3>
+              <div class="text-center font-italic">
+                  <span>Abusive or threatening speech or writing that expresses prejudice against a particular group, especially on the basis of race, religion, or sexual orientation</span>
+              </div>
+              <h1 class="text-center">What is this Hate Speech Application?</h1>
+              <div class="text-sm-left text-center">
+                  <span>Hate Speech is a very hot topic in today's society. Everyday, social media is trying to find new ways to prevent hate speech appearing online. They are constantly being put under pressure by users and the media to ban this type of speech. </span>
+                  <br>
+                  <span>What this project has aimed to do is provide a way of accurately predicting when hate speech is being used in text. It has taken examples of hate speech from social media and from pre-existing datasets. These samples were then used to train a machine learning algorithm, which is used to make the predictions from this website.</span>
+                  <br>
+                  <span>A large portion of this project has been completed by using Twitter and its easy-to-use python library Tweepy. Unlike other social media applications, Twitter's data is public by default. Therefore, it is easy to read tweets and make decisions as to whether or not they are hate speech.</span>
+                  <br>
+                  <span>It is worth noting that at no point will this website save any data, whether it be inputted text, an inputted twitter handle or tweets from a users twitter account. The text is merely passed through the classifier and then deleted.</span>
+              </div>
+          </section>
+          <section class="col-sm-6" >
+              <h1 class="text-center" style="margin-top:10%;">What can you do with this application?</h1>
+              <h3 class="text-center">Input a Twitter Handle</h3>
+              <div class="text-sm-left text-center">
+                  <span>This allows you to input a twitter handle and choose the number of tweets you want the programme to read. Using Tweepy, it will then search for the most recent tweets made by that user and classifies each of them. It then outputs whether that account regularly uses hate speech or not and gives you a break down of the percentage at which each tweet was classified at.</span>
+              </div>
+              <h3 class="text-center">Input Text</h3>
+              <div class="text-sm-left text-center" style="margin-bottom: 10%">
+                  <span>This option allows you to input text through a text field. As this project has largely been modelled of of twitter, this text field has a maximum character count of 280 to mimic that of Twitter. Once you submit the text, the algorithm will then classify it and return the prediction and the probability of it being correct. It also displays how likely each word is to appear in hate speech text.</span>
+              </div>
+          </section>
+      </div> <!-- row -->
+      <div class="row bg-info py-3" id="algorithm">
+          <section class="col-sm-6">
+              <h1 class="text-center">What machine learning algorithm is used & how does it work?</h1>
+              <div class="text-sm-left text-center">
+                  <span>This application uses a Multinominal Naive Bayes (MNB) algorithm to make predictions. It uses Scikit-learn's libraries to implement this. What this means is it uses a multinomial distribution for each feature and is based off of Bayes' rule.</span>
+                  <br>
+                  <span>Tests were run against various algorithms to help make a decision on the best one. The accuracy scores were compared and contrasted in various ways to ensure the success of the algorithm. Overall, MNB came out on top.</span>
+                  <br>
+                  <span>A lot of pre-processing on the text is also done to help the algorithm with the classification. This involves beaking down each word in the text and identifying patterns & characteristics.</span>
+                  <br>
+                  <span>Some methods used include converting emojis to text, removing stop words, tokenising each sentence, remvoing '#' from text, converting each word back to its original stem, and counting how often that word appears in the dataset.</span>
+              </div>
+          </section>
+          <section class="col-sm-6">
+              <h2 class="text-center">Example Results</h2>
+              <img class="img-thumbnail img-fluid py-1" src="images/ml.PNG" alt="ROC Curve">
+              <div class="text-sm-left text-center">
+                  <span>The above image shows one way in which the algorithms were compared. This is a Receiver Operating Characteristic (ROC) curve. This describes an algorithms accuracy by analysing how many false classifications it makes for various thresholds.</span>
+              </div>
+          </section>
+      </div> <!-- row -->
+      <div class="row bg-secondary py-3" id="contact">
+          <section class="col-sm-6 py-1">
+              <h1 class="text-center">About the developer</h1>
+              <div class="text-center text-sm-left">
+                  <span>Mark is a final year Electronic and Computer Engineering student. This application was completed as his final year project. This project was chosen due to his interest in the area and his desire to delve into the area and figure out tactics as to how social media giants are battling hate speech online.</span>
+                  <br>
+                  <span>If you have a question as to how the application works or want to find out more about it do not hesitate to get in contact. Feel free to also let us know how well the algorithm is performing. If you think it got something wrong, send it my way and I will work to improve the accuracy in the future. </span>
+              </div>
+          </section>
+          <form method="post" class="col-sm-6 py-1 form-group" name="myemailform" action="formToEmail.php">
+              <label class="form-control-label" for="userId">Enter your name</label>
+              <input class="form-control" type="text" name="name" id="name" placeholder="Jane Doe" required>
+              <label class="form-control-label" for="userId">Enter your email address</label>
+              <input class="form-control" type="text" name="email" id="email" placeholder="example@gmail.com" required>
+              <label class="form-control-label" for="UserMessage">Enter your message</label>
+              <textarea class="form-control" id="UserMessage" name="UserMessage" maxlength="500" rows="3" style="resize: none; height: 20vh;" required></textarea>
+              <input class="btn btn-primary btn-block mt-2" type="submit" name="submit" value="Submit" id="submitText"/>
+          </form>
+      </div> <!-- row -->
+  </div><!-- container -->
+<script src="js/jquery.min.js"></script>
+<script src="http://malsup.github.io/jquery.blockUI.js"></script>
+<script src="js/popper.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0/dist/Chart.min.js"></script>
+<script src="js/binding.js"></script>
+<script src="json/data.json"></script>
+</body>
+</html>
